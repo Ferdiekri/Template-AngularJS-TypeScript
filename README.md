@@ -1,5 +1,5 @@
 # Template-AngularJS-TypeScript
 
 ## Crear un tag
-  - git tag <tagname>
+  - git tag nombre
   - git push origin --tags
