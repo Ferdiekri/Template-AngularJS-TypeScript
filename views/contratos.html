@@ -8,27 +8,72 @@
 
 
 
-<div class="bg-info p-3">
-    <p>Total de contratos: <strong>{{ vm.contratos.length }}</strong></p>
+<div class="bg-info p-3 mb-2">
+    <h3>Resumen de contratos:</h3>
+    <ul>
+        <li>Total de contratos: <strong>{{ vm.contratos.length }}</strong></li>
+        <li>Número de contratos sin acciones: <strong>{{ vm.contratosSinAcciones.length }}</strong></li>
+        <li>Número de contratos con acciones: <strong>{{ vm.contratosConAcciones.length }}</strong></li>
+        
+        <li>Número de contratos con 0 acciones: <strong>{{ vm.contratosNingunaAccion.length }}</strong></li>
+        <li>Número de contratos entre 1 y 3 acciones: <strong>{{ vm.contratosPocasAcciones.length }}</strong></li>
+        <li>Número de contratos con más acciones: <strong>{{ vm.contratosMuchasAcciones.length }}</strong></li>
+        <li>Buscar el primer contrato que tenga en ACCIONES "clave": "SITUACIÓN": <strong>{{ vm.primerContrato.length }}</strong></li>
+        <li>Buscar el último contrato que tenga en ACCIONES "clave": "SITUACIÓN": <strong>{{  }}</strong></li>
+        <li>Todas las acciones diferentes: <strong>{{  }}</strong></li>
+    </ul>
+
     <input ng-model="busqueda.nombre"
         type="text" class="form-control" autofocus placeholder="Filtrar por nombre">
 </div>
 
-
-<table class="table table-dark">
-    <thead>
-      <tr>
-        <th scope="col" ng-click="campo='idColumn';orden=!orden">IdColum</th>
-        <th scope="col" ng-click="campo='nombre';orden=!orden">Nombre</th>
-        <th scope="col" ng-click="campo='ACCIONES.length';orden=!orden">Nº Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="cont in vm.contratos | filter:busqueda | orderBy:campo:orden">
-            
-        <th>{{ cont.idColumn }}</th>
-        <td class="{{ (!cont.nombre)?'vacio':'lleno' }}">{{ (cont.nombre)?cont.nombre:'sin nombre' }}</td>
-        <td class="{{ (!cont.ACCIONES)?'vacio':'lleno' }}">{{ (cont.ACCIONES)?cont.ACCIONES.length:0 }}</td>
-      </tr>
-    </tbody>
-  </table>
+<p>
+    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample2">Todosl los contratos</button>
+    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Contratos mapeados</button>
+</p>
+<div class="row">
+    <div class="col">
+        <div class="collapse" id="multiCollapseExample1">
+            <div class="card card-body">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                        <th scope="col" ng-click="campo='idColumn';orden=!orden">IdColum</th>
+                        <th scope="col" ng-click="campo='nombre';orden=!orden">Nombre</th>
+                        <th scope="col" ng-click="campo='ACCIONES.length';orden=!orden">Nº Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="cont in vm.contratos | filter:busqueda | orderBy:campo:orden"> 
+                        <th>{{ cont.idColumn }}</th>
+                        <td class="{{ (!cont.nombre)?'vacio':'lleno' }}">{{ (cont.nombre)?cont.nombre:'sin nombre' }}</td>
+                        <td class="{{ (!cont.ACCIONES.length)?'vacio':'lleno' }}">{{ (cont.ACCIONES)?cont.ACCIONES.length:0 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="collapse" id="multiCollapseExample2">
+            <div class="card card-body">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col" ng-click="campo='id';orden=!orden">IdColum</th>
+                            <th scope="col" ng-click="campo='nombre';orden=!orden">Nombre</th>
+                            <th scope="col" ng-click="campo='numeroAcciones';orden=!orden">Nº Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="cont in vm.contratosMapeados | filter:busqueda | orderBy:campo:orden">
+                            <th>{{ cont.id }}</th>
+                            <td class="{{ (cont.nombre == 'Sin nombre')?'vacio':'lleno' }}">{{ cont.nombre }}</td>
+                            <td class="{{ (cont.numeroAcciones == 0)?'vacio':'lleno' }}">{{ cont.numeroAcciones }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
