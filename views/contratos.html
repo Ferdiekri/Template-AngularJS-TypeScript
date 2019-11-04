@@ -1,0 +1,34 @@
+<h2>{{ vm.titulo }}</h2>
+<hr>
+<!--
+<pre><code>
+    {{ vm.contratos | json }}
+</code></pre>
+-->
+
+
+
+<div class="bg-info p-3">
+    <p>Total de contratos: <strong>{{ vm.contratos.length }}</strong></p>
+    <input ng-model="busqueda.nombre"
+        type="text" class="form-control" autofocus placeholder="Filtrar por nombre">
+</div>
+
+
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col" ng-click="campo='idColumn';orden=!orden">IdColum</th>
+        <th scope="col" ng-click="campo='nombre';orden=!orden">Nombre</th>
+        <th scope="col" ng-click="campo='ACCIONES.length';orden=!orden">Nº Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="cont in vm.contratos | filter:busqueda | orderBy:campo:orden">
+            
+        <th>{{ cont.idColumn }}</th>
+        <td class="{{ (!cont.nombre)?'vacio':'lleno' }}">{{ (cont.nombre)?cont.nombre:'sin nombre' }}</td>
+        <td class="{{ (!cont.ACCIONES)?'vacio':'lleno' }}">{{ (cont.ACCIONES)?cont.ACCIONES.length:0 }}</td>
+      </tr>
+    </tbody>
+  </table>
