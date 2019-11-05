@@ -38,7 +38,43 @@
         
     </div>
     <div class="col-4 bg-warning">
-        {{ vm.libroFormulario }}
+        <h3>{{ vm.tituloseccion }}</h3>
+        <form class="form-horizontal" name="libroFormulario" novalidate>
+            <div class="form-group">
+                <div>
+                    <input type="text" 
+                        class="form-control" 
+                        id="id" name="id"
+                        ng-model="vm.libroFormulario.id" readonly placeholder="Id">
+                </div>
+                <div class="col" ng-class="(libroFormulario.isbn.$valid || libroFormulario.$pristine)?'has-success':'has-error'">
+                    <input type="text" 
+                            class="form-control" 
+                            id="isbn" name="isbn"
+                            ng-model="vm.libroFormulario.isbn" required placeholder="I.S.B.N. del libro.">
+                    <p class="help-block" ng-hide="libroFormulario.isbn.$valid || libroFormulario.$pristine">
+                        Este campo es necesario
+                    </p>
+                </div>
+                <div class="col" ng-class="(libroFormulario.titulo.$valid || libroFormulario.$pristine)?'has-success':'has-error'">
+                    <input type="text" 
+                            class="form-control" 
+                            id="titulo" name="titulo"
+                            ng-model="vm.libroFormulario.titulo" required placeholder="Nombre del libro.">
+                    <p class="help-block" ng-hide="libroFormulario.titulo.$valid || libroFormulario.$pristine">
+                        Este campo es necesario
+                    </p>
+                </div>
+                <div class="col" ng-class="(libroFormulario.autor.$valid || libroFormulario.$pristine)?'has-success':'has-error'">
+                    <input type="text" 
+                            class="form-control" 
+                            id="autor" name="autor"
+                            ng-model="vm.libroFormulario.autor" required placeholder="Autor del libro.">
+                    <p class="help-block" ng-hide="libroFormulario.autor.$valid || libroFormulario.$pristine">
+                        Este campo es necesario
+                    </p>
+                </div>
+            </div>
 
     </div>
 

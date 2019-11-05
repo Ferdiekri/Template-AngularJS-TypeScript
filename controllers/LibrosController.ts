@@ -7,6 +7,7 @@ class LibrosController implements ng.IController{
     public static $inyect = ["$scope·"];
     public libros: Array<ILibro>;
     public libroFormulario: ILibro;
+    public tituloseccion: string;
 
    
     //funcion
@@ -18,13 +19,15 @@ class LibrosController implements ng.IController{
         console.trace("LibrosController constructor");
         this.$scope.vm = this;
         $scope.vm.libros = [];
+        $scope.vm.tituloseccion = "Nuevo Libro:";
 
         librosService.getLibros().then( datos => $scope.vm.libros = datos );   
 
         this.editarLibro = (lib: ILibro) => {
             console.trace("Click & %o",lib);
             this.$scope.vm.libroFormulario = lib;
-        } // hola
+            $scope.vm.tituloseccion = "Editar Libro: " + lib.id;
+        } // editarLibro()
        
 
     } // constructor
