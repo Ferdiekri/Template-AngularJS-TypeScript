@@ -1,10 +1,18 @@
 var LibrosController = (function () {
-    function LibrosController($scope) {
+    function LibrosController($scope, librosService) {
+        var _this = this;
         this.$scope = $scope;
+        this.librosService = librosService;
         console.trace("LibrosController constructor");
-        $scope.vm = this;
+        this.$scope.vm = this;
+        $scope.vm.libros = [];
+        librosService.getLibros().then(function (datos) { return $scope.vm.libros = datos; });
+        this.editarLibro = function (lib) {
+            console.trace("Click & %o", lib);
+            _this.$scope.vm.libroFormulario = lib;
+        };
     }
-    LibrosController.$inyect = ["$scope·", "contratos"];
+    LibrosController.$inyect = ["$scope·"];
     return LibrosController;
 }());
 //# sourceMappingURL=LibrosController.js.map

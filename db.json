@@ -5,17 +5,25 @@
       "isbn": "2345678",
       "titulo": "Inventos infernales",
       "paginas": 220,
-      "autor": "Doctor Frankenstein",
+      "autor": "Philip Reeve",
       "digital": false
     },
     {
-      "id": 1,
+      "id": 2,
       "isbn": "987654",
       "titulo": "Mortadelo y Filemon",
       "paginas": 46,
       "autor": "Ibáñez",
       "digital": true,
       "formatos": [".epub",".pdf"]
+    },
+    {
+      "id": 3,
+      "isbn": "6574893",
+      "titulo": "Máquinas mortales",
+      "paginas": 340,
+      "autor": "Philip Reeve",
+      "digital": false
     }
   ],
   "posts": [

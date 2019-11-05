@@ -16,8 +16,9 @@ const app = angular.module( "repaso",       //nombre de la app o módulo princip
 
 // 2. Registro de módulos & servicios en la App.
 app
-    .controller("contratosController", ContratosController)
-    .controller("librosController", LibrosController);
+  .service("librosService", LibrosService)
+  .controller("contratosController", ContratosController)
+  .controller("librosController", LibrosController);
 
 // 3. Configuración de rutas
 

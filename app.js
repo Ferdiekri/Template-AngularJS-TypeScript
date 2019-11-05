@@ -1,5 +1,6 @@
 var app = angular.module("repaso", ["ui.router"]);
 app
+    .service("librosService", LibrosService)
     .controller("contratosController", ContratosController)
     .controller("librosController", LibrosController);
 app.config([

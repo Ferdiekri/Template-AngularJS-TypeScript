@@ -1,1 +1,77 @@
 <h2>Listado de libros</h2>
+<hr>
+
+<div class="row">
+    <div class="col-8">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                <th scope="col" ng-click="campo='id';orden=!orden">Id</th>
+                <th scope="col" ng-click="campo='isbn';orden=!orden">I.S.B.N.</th>
+                <th scope="col" ng-click="campo='titulo';orden=!orden">Título</th>
+                <th scope="col" ng-click="campo='autor';orden=!orden">Autor</th>
+                <th scope="col" ng-click="campo='paginas';orden=!orden">Páginas</th>
+                <th scope="col" ng-click="campo='formato';orden=!orden">Formato</th>
+                <th scope="col" >Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="libro in vm.libros | orderBy:campo:orden"> 
+                    <th>{{ libro.id }}</th>
+                    <td>{{ libro.isbn }}</td>
+                    <td>{{ libro.titulo }}</td>
+                    <td>{{ libro.autor }}</td>
+                    <td>{{ libro.paginas }}</td>
+                    <td>
+                        {{ (libro.digital)?'Digital':'Físico' }}
+                        <ul>
+                            <li ng-repeat="formato in libro.formatos">{{ formato }}</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span ng-click="vm.editarLibro(libro)"><i class="fas fa-pen-square fa-2x text-info"></i></span>
+                        <i class="fas fa-minus-square fa-2x text-danger"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+    <div class="col-4 bg-warning">
+        {{ vm.libroFormulario }}
+
+    </div>
+
+</div>
+
+
+
+
+
+<hr><hr><hr><hr>
+<div class="row">
+        <div class="col" ng-repeat="libro in vm.libros">
+            <div class="card" style="width: 18rem;" >
+                <div class="card-body">
+                <h5 class="card-title">{{ libro.titulo }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ libro.autor }}</h6>
+                <p class="card-text">
+                    <ul>
+                        <li>I.S.B.N.: {{ libro.isbn }}</li>
+                        <li>Páginas: {{ libro.paginas }}</li>
+                        <li>Formato: {{ (libro.digital)?'Digital':'Físico' }}
+                            <ul>
+                                <li ng-repeat="formato in libro.formatos">{{ formato }}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </p>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
