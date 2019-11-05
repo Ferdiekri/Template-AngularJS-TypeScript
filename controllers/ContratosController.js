@@ -16,20 +16,21 @@ var ContratosController = (function () {
         });
         $scope.vm.contratosSinAcciones = $scope.vm.contratos.filter(function (elem) { return !elem.ACCIONES; });
         $scope.vm.contratosConAcciones = $scope.vm.contratos.filter(function (elem) { return elem.ACCIONES; });
+        $scope.vm.contratosNingunaAccion = $scope.vm.contratos.filter(function (elem) { return (elem.ACCIONES && elem.ACCIONES == 0); });
         $scope.vm.contratosPocasAcciones = $scope.vm.contratosMapeados.filter(function (elem) { return (elem.numeroAcciones >= 1 && elem.numeroAcciones <= 3); });
         $scope.vm.contratosMuchasAcciones = $scope.vm.contratosMapeados.filter(function (elem) { return elem.numeroAcciones > 3; });
-        $scope.vm.contratosNingunaAccion = $scope.vm.contratos.filter(function (elem) { return (elem.ACCIONES && elem.ACCIONES == 0); });
-        $scope.vm.primerContrato = $scope.vm.contratos.filter(function (elem) {
-            if (elem.ACCIONES != undefined) {
-                var resul = elem.ACCIONES.filter(function (e) { return e.clave == 'SITUACION'; });
-                return (resul.length === 1);
-            }
-            else {
-                return false;
-            }
-        });
-        console.debug("pruebas");
-        $scope.vm.pruebas = $scope.vm.primerContrato.find(function (el) { return el.ACCIONES.clave == 'SITUACION'; });
+        $scope.vm.primerContrato = $scope.vm.contratos
+            .filter(function (elem) { return elem.ACCIONES && elem.ACCIONES.length > 0; })
+            .find(function (elem) { return elem.ACCIONES.find(function (elem) { return elem.clave == 'SITUACION'; }); });
+        $scope.vm.ultimoContrato = $scope.vm.contratos.reverse()
+            .filter(function (elem) { return elem.ACCIONES && elem.ACCIONES.length > 0; })
+            .find(function (elem) { return elem.ACCIONES.find(function (elem) { return elem.clave == 'SITUACION'; }); });
+        $scope.vm.accionesDiferentes = $scope.vm.contratosConAcciones
+            .map(function (elem) { return elem.ACCIONES
+            .map(function (e) { return e.titulo; }).flat(); })
+            .flat()
+            .filter(function (v, i, a) { return a.indexOf(v) === i; });
+        $scope.vm.accionesDiferentes.sort();
     }
     ContratosController.$inyect = ["$scope·", "contratos"];
     return ContratosController;

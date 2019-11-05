@@ -6,21 +6,18 @@
 </code></pre>
 -->
 
-
-
 <div class="bg-info p-3 mb-2">
     <h3>Resumen de contratos:</h3>
     <ul>
         <li>Total de contratos: <strong>{{ vm.contratos.length }}</strong></li>
         <li>Número de contratos sin acciones: <strong>{{ vm.contratosSinAcciones.length }}</strong></li>
         <li>Número de contratos con acciones: <strong>{{ vm.contratosConAcciones.length }}</strong></li>
-        
         <li>Número de contratos con 0 acciones: <strong>{{ vm.contratosNingunaAccion.length }}</strong></li>
         <li>Número de contratos entre 1 y 3 acciones: <strong>{{ vm.contratosPocasAcciones.length }}</strong></li>
         <li>Número de contratos con más acciones: <strong>{{ vm.contratosMuchasAcciones.length }}</strong></li>
-        <li>Buscar el primer contrato que tenga en ACCIONES "clave": "SITUACIÓN": <strong>{{ vm.primerContrato[0].idColumn }}</strong></li>
-        <li>Buscar el último contrato que tenga en ACCIONES "clave": "SITUACIÓN": <strong>{{  }}</strong></li>
-        <li>Todas las acciones diferentes: <strong>{{  }}</strong></li>
+        <li>Buscar el primer contrato que tenga en ACCIONES "clave": "SITUACIÓN": <strong>{{ vm.primerContrato.idColumn }}</strong></li>
+        <li>Buscar el último contrato que tenga en ACCIONES "clave": "SITUACIÓN": <strong>{{ vm.ultimoContrato.idColumn }}</strong></li>
+        <li>Todas las acciones diferentes: <strong>{{ vm.accionesDiferentes.length }}: {{ vm.accionesDiferentes }}</strong></li>
     </ul>
 
     <input ng-model="busqueda.nombre"

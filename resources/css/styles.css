@@ -1,3 +1,6 @@
+body{
+    margin-bottom: 50px;
+}
 .active{
     color:teal;
     font-weight: 800;
