@@ -1,4 +1,23 @@
 {
+  "libros": [
+    {
+      "id": 1,
+      "isbn": "2345678",
+      "titulo": "Inventos infernales",
+      "paginas": 220,
+      "autor": "Doctor Frankenstein",
+      "digital": false
+    },
+    {
+      "id": 1,
+      "isbn": "987654",
+      "titulo": "Mortadelo y Filemon",
+      "paginas": 46,
+      "autor": "Ibáñez",
+      "digital": true,
+      "formatos": [".epub",".pdf"]
+    }
+  ],
   "posts": [
     {
       "id": 1,

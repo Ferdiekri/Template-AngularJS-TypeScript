@@ -16,7 +16,8 @@ const app = angular.module( "repaso",       //nombre de la app o módulo princip
 
 // 2. Registro de módulos & servicios en la App.
 app
-    .controller("contratosController", ContratosController);
+    .controller("contratosController", ContratosController)
+    .controller("librosController", LibrosController);
 
 // 3. Configuración de rutas
 
@@ -35,23 +36,30 @@ app.config([
     $stateProvider
         
         // Home.
-        .state("home", {
+        .state("home",      {
                             url: "/home",
                             templateUrl: "views/home.html"        
-                        }
+                            }
         )
         // Leeme
-        .state("leeme", {
+        .state("leeme",     {
                             url: "/leeme",
                             templateUrl: "views/leeme.html"        
-                        }
+                            }
         )
-        // Leeme
+        // Contratos
         .state("contratos", {
                             url: "/filter-map-reduce",
                             templateUrl: "views/contratos.html",
                             controller: ContratosController       
-                        }
+                            }
+        )
+        // Libros
+        .state("libros",    {
+                            url: "/listado-libros",
+                            templateUrl: "views/libros.html" ,
+                            controller: LibrosController      
+                            } 
         );
     }
 ]);

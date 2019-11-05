@@ -2,12 +2,6 @@ interface IContratosController extends ng.IScope{
     vm: ContratosController;
 }
 
-interface IContratoResumen {
-    id: string;
-    nombre: string;
-    numeroAcciones: number;
-}
-
 class ContratosController implements ng.IController{
     
     public titulo: string;
@@ -21,6 +15,7 @@ class ContratosController implements ng.IController{
     public primerContrato: Array<any>;
     public ultimoContrato: Array<any>;
     public accionesDiferentes: Array<any>;
+    public acciones: Array<string>;
 
     public static $inyect = ["$scope·", "contratos"];
     
@@ -67,14 +62,16 @@ class ContratosController implements ng.IController{
         );
 
         // Todas las acciones diferentes
+        /*
         $scope.vm.accionesDiferentes = $scope.vm.contratosConAcciones
             .map( (elem) => elem.ACCIONES
                 .map(e => e.titulo).flat() )
             .flat()
             .filter( (v,i,a) => a.indexOf(v) === i );
         $scope.vm.accionesDiferentes.sort();
+        */
 
-        /*
+        
         // Otra forma de hacerlo pero en vez de utilizar '.flat' utilizamos '.reduce'.
 
         let accionesDuplicadas: Array<any> = $scope.vm.contratos
@@ -86,7 +83,7 @@ class ContratosController implements ng.IController{
             .map(x => x.titulo);                              // quedarnos con el titulo de la accion
 
         $scope.vm.acciones = [...new Set(accionesDuplicadas)].sort(); // eliminar duplicados y ordena
-        */
+        /**/
 
     } // constructor
 }
