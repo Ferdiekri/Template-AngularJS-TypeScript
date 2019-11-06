@@ -8,6 +8,7 @@ class LibrosController implements ng.IController{
     public libros: Array<ILibro>;
     public libroFormulario: ILibro;
     public tituloseccion: string;
+    public formatos: any;
 
    
     //funcion
@@ -23,11 +24,15 @@ class LibrosController implements ng.IController{
 
         librosService.getLibros().then( datos => $scope.vm.libros = datos );   
 
+        $scope.vm.formatos = $scope.vm.libros.filter( (elem) => elem.formatos );
+        console.trace("osdjfoisdjfoi aspdfapsfpoaspofkas");
         this.editarLibro = (lib: ILibro) => {
             console.trace("Click & %o",lib);
             this.$scope.vm.libroFormulario = lib;
             $scope.vm.tituloseccion = "Editar Libro: " + lib.id;
         } // editarLibro()
+
+        
        
 
     } // constructor

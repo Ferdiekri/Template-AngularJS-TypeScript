@@ -39,42 +39,82 @@
     </div>
     <div class="col-4 bg-warning">
         <h3>{{ vm.tituloseccion }}</h3>
-        <form class="form-horizontal" name="libroFormulario" novalidate>
+        <h3>Formatos: {{ vm.formatos }} -</h3>
+
+        <form>
+            <div class="form-group row">
+                <div class="col-3 text-right">
+                    <label for="isbn">I.S.B.N.:</label>    
+                </div>
+                <div class="col-9">
+                    <input type="text" class="form-control" id="isbn" ng-model="vm.libroFormulario.isbn"  placeholder="I.S.B.N. del libro">
+                </div> 
+            </div> <!-- isbn -->
+
+            <div class="form-group row">
+                <div class="col-3 text-right">
+                    <label for="title">Titulo:</label>
+                </div>
+                <div class="col-9">
+                    <input type="text" class="form-control" id="title" ng-model="vm.libroFormulario.titulo" placeholder="Título del libro">
+                </div> 
+            </div> <!-- titulo -->
+
+            <div class="form-group row">
+                <div class="col-3 text-right">
+                    <label for="autor">Autor:</label>
+                </div>
+                <div class="col-9">
+                    <input type="text" class="form-control"  ng-model="vm.libroFormulario.autor"  id="autor" placeholder="Autor del libro">
+                </div>
+            </div> <!-- autor -->
+
+            <div class="form-group row">
+                <div class="col-3 text-right">
+                    <label for="paginas">Páginas:</label>
+                </div>
+                <div class="col-9">
+                    <input type="number" class="form-control" ng-model="vm.libroFormulario.paginas"  id="paginas" placeholder="Número de paginas del libro">
+                </div>
+            </div> <!-- paginas -->
+
+            <div class="form-group row">
+                <div class="col-3 text-right">
+                    <label for="formato">Formato:</label>
+                </div>
+                <div class="col-9">
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="radio" aria-label="Radio button for following text input" name="digital" id="digital" ng-checked="vm.libroFormulario.digital">
+                                <label class="form-check-label" for="papel">Digital</label>
+                            </div>
+                            <div class="input-group-text">
+                                <input type="radio" aria-label="Radio button for following text input" name="digital" id="papel" ng-checked="!vm.libroFormulario.digital">
+                                <label class="form-check-label" for="papel">Papel</label>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Text input with radio button">
+                    </div>
+                </div>
+            </div> <!-- formato -->
+
+<!--
             <div class="form-group">
-                <div>
-                    <input type="text" 
-                        class="form-control" 
-                        id="id" name="id"
-                        ng-model="vm.libroFormulario.id" readonly placeholder="Id">
+                <p>Tipo:</p>
+                <div class="form-check form-check-inline" ng-repeat="formato in vm.formatos">
+                      <input class="form-check-input" type="checkbox" id="{{formato}}" ng-checked="vm.libroFormulario.formatos[$index]" value="{{formato}}">
+                      <label class="form-check-label" for="{{formato}}">{{formato}}</label>
                 </div>
-                <div class="col" ng-class="(libroFormulario.isbn.$valid || libroFormulario.$pristine)?'has-success':'has-error'">
-                    <input type="text" 
-                            class="form-control" 
-                            id="isbn" name="isbn"
-                            ng-model="vm.libroFormulario.isbn" required placeholder="I.S.B.N. del libro.">
-                    <p class="help-block" ng-hide="libroFormulario.isbn.$valid || libroFormulario.$pristine">
-                        Este campo es necesario
-                    </p>
-                </div>
-                <div class="col" ng-class="(libroFormulario.titulo.$valid || libroFormulario.$pristine)?'has-success':'has-error'">
-                    <input type="text" 
-                            class="form-control" 
-                            id="titulo" name="titulo"
-                            ng-model="vm.libroFormulario.titulo" required placeholder="Nombre del libro.">
-                    <p class="help-block" ng-hide="libroFormulario.titulo.$valid || libroFormulario.$pristine">
-                        Este campo es necesario
-                    </p>
-                </div>
-                <div class="col" ng-class="(libroFormulario.autor.$valid || libroFormulario.$pristine)?'has-success':'has-error'">
-                    <input type="text" 
-                            class="form-control" 
-                            id="autor" name="autor"
-                            ng-model="vm.libroFormulario.autor" required placeholder="Autor del libro.">
-                    <p class="help-block" ng-hide="libroFormulario.autor.$valid || libroFormulario.$pristine">
-                        Este campo es necesario
-                    </p>
-                </div>
+               
             </div>
+ -->
+     </form>
+      <button  class="btn btn-success" type="submit" ng-click="vm.crear()" ng-show="(vm.libroEditar)?false:true">Crear</i></button>
+      <button  class="btn btn-success" type="submit" ng-click="vm.editar()" ng-show="(vm.libroEditar)?true:false">Guardar</i></button>
+
+
 
     </div>
 
