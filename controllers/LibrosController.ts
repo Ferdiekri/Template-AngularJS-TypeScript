@@ -9,6 +9,7 @@ class LibrosController implements ng.IController{
     public libroFormulario: ILibro;
     public tituloseccion: string;
     public formatos: any;
+    public formatosElegidos: any;
     public mensaje: string;
     public libroBorrar: ILibro;
     public temp:any;
@@ -103,7 +104,7 @@ class LibrosController implements ng.IController{
           
             $scope.vm.formatos = temporal.filter((v,i,a)=>a.indexOf(v)===i);
             console.debug("formatos %o", $scope.vm.formatos);
-            
+
             /*
 
             let sacarFormatos = $scope.vm.libros

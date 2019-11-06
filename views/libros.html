@@ -116,11 +116,13 @@
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <input type="radio" aria-label="Radio button for following text input" name="digital" ng-checked="vm.libroFormulario.digital" ng-click="ocultar=true">
+                                <input type="radio" aria-label="Radio button for following text input" name="digital"
+                                        ng-checked="vm.libroFormulario.digital" ng-click="ocultar=true">
                                 <label class="form-check-label" for="digital">Digital</label>
                             </div>
                             <div class="input-group-text">
-                                <input type="radio" aria-label="Radio button for following text input" name="papel" ng-checked="!vm.libroFormulario.digital" ng-click="ocultar=false">
+                                <input type="radio" aria-label="Radio button for following text input" name="papel"
+                                        ng-checked="!vm.libroFormulario.digital" ng-click="ocultar=false">
                                 <label class="form-check-label" for="papel">Físico</label>
                             </div>
                         </div>
@@ -133,17 +135,12 @@
                 <div class="col-3 text-right">
                     <label for="formato">Tipos de formato:</label>
                 </div>
+                <!-- https://stackoverflow.com/questions/41038686/how-to-get-the-values-of-multiple-checkboxes-in-angularjs -->
                 <div class="col-9">
                     <div class="input-group-prepend row">
                         <div class="input-group-text" ng-repeat="formato in vm.formatos">
-                            <input type="checkbox" aria-label="Checkbox for following text input" >
-                            <label class="form-check-label" for="papel">{{ formato }}</label>
-                        </div>
-                        <div class="input-group-text">
-                            <input type="checkbox" aria-label="Checkbox for following text input" >
-                            <label class="form-check-label" for="papel">
-                                Otro: <input type="text" class="form-control" name="otroFormato">
-                            </label>
+                            <input type="checkbox" id="{{formato}}" ng-model="vm.formatosSeleccionados[formato]">
+                            <label class="form-check-label" for="{{formato}}">{{ formato }}</label>
                         </div>
                     </div>
                 </div>

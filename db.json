@@ -29,7 +29,6 @@
       "id": 3,
       "digital": true,
       "formatos": [
-        "mobi",
         "pdf"
       ]
     },
@@ -39,7 +38,8 @@
       "autor": "Autor 4",
       "paginas": 444,
       "id": 4,
-      "digital": false
+      "digital": false,
+      "formatos": true
     },
     {
       "isbn": "55555",
@@ -54,8 +54,10 @@
       ]
     },
     {
-      "isbn": "11111",
-      "titulo": "aaaaaaaa",
+      "isbn": "12345",
+      "titulo": "hola",
+      "autor": "Eder",
+      "paginas": 4,
       "id": 6
     }
   ],
