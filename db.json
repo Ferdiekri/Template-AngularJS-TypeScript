@@ -1,29 +1,62 @@
 {
   "libros": [
     {
+      "isbn": "11111",
+      "titulo": "Libro 1",
+      "autor": "Autor 1",
+      "paginas": 111,
       "id": 1,
-      "isbn": "2345678",
-      "titulo": "Inventos infernales",
-      "paginas": 220,
-      "autor": "Philip Reeve",
-      "digital": false
-    },
-    {
-      "id": 2,
-      "isbn": "987654",
-      "titulo": "Mortadelo y Filemon",
-      "paginas": 46,
-      "autor": "Ibáñez",
       "digital": true,
-      "formatos": [".epub",".pdf"]
+      "formatos": [
+        "epub",
+        "mobi",
+        "pdf"
+      ]
     },
     {
-      "id": 3,
-      "isbn": "6574893",
-      "titulo": "Máquinas mortales",
-      "paginas": 340,
-      "autor": "Philip Reeve",
+      "isbn": "22222",
+      "titulo": "Libro 22222",
+      "autor": "Autor 2",
+      "paginas": 222,
+      "id": 2,
       "digital": false
+    },
+    {
+      "isbn": "33333",
+      "titulo": "Libro 3",
+      "autor": "Autor 3",
+      "paginas": 333,
+      "id": 3,
+      "digital": true,
+      "formatos": [
+        "mobi",
+        "pdf"
+      ]
+    },
+    {
+      "isbn": "44444",
+      "titulo": "Libro 4",
+      "autor": "Autor 4",
+      "paginas": 444,
+      "id": 4,
+      "digital": false
+    },
+    {
+      "isbn": "55555",
+      "titulo": "Libro 5",
+      "autor": "Autor 5",
+      "paginas": 555,
+      "id": 5,
+      "digital": true,
+      "formatos": [
+        "epub",
+        "pdf"
+      ]
+    },
+    {
+      "isbn": "11111",
+      "titulo": "aaaaaaaa",
+      "id": 6
     }
   ],
   "posts": [

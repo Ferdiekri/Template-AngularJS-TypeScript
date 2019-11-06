@@ -1,6 +1,8 @@
 <h2>Listado de libros</h2>
 <hr>
 
+<p ng-if="vm.mensaje" class="bg-info p-2">{{ vm.mensaje }}</p>
+
 <div class="row">
     <div class="col-8">
         <table class="table table-striped table-dark">
@@ -29,25 +31,49 @@
                         </ul>
                     </td>
                     <td>
-                        <span ng-click="vm.editarLibro(libro)"><i class="fas fa-pen-square fa-2x text-info"></i></span>
-                        <i class="fas fa-minus-square fa-2x text-danger"></i>
+                        <i class="fas fa-pen-square fa-2x text-info" ng-click="vm.editarLibro(libro)"></i>
+                        <i class="fas fa-minus-square fa-2x text-danger" data-toggle="modal" data-target="#modalBorrar" ng-click="vm.libroBorrar = libro"></i>
+
+                        <!-- Modal -->
+                        <div class="modal fade text-dark" id="modalBorrar" tabindex="-1" role="dialog" aria-labelledby="modalBorrarLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalBorrarLabel">¿Estás seguro de querer borrar "{{ vm.libroBorrar.titulo }}"?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Si borras "<strong>{{ vm.libroBorrar.titulo }}</strong>" de <strong>{{ vm.libroBorrar.autor }}</strong> ya no podrás recuperar los datos del registro.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.borrarLibro()">Borrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- modal -->
                     </td>
                 </tr>
             </tbody>
         </table>
         
-    </div>
-    <div class="col-4 bg-warning">
-        <h3>{{ vm.tituloseccion }}</h3>
-        <h3>Formatos: {{ vm.formatos }} -</h3>
+    </div> <!-- col tabla -->
 
-        <form>
+    <div class="col-4">
+        <h3>{{ vm.tituloseccion }}</h3>
+        
+
+        <form name="formulario" ng-submit="vm.guardarLibro()" novalidate>
+
             <div class="form-group row">
                 <div class="col-3 text-right">
                     <label for="isbn">I.S.B.N.:</label>    
                 </div>
                 <div class="col-9">
-                    <input type="text" class="form-control" id="isbn" ng-model="vm.libroFormulario.isbn"  placeholder="I.S.B.N. del libro">
+                    <input type="text" class="form-control" name="isbn" ng-model="vm.libroFormulario.isbn"
+                        required minlength="5" maxlength="20" placeholder="I.S.B.N. del libro">
                 </div> 
             </div> <!-- isbn -->
 
@@ -56,7 +82,8 @@
                     <label for="title">Titulo:</label>
                 </div>
                 <div class="col-9">
-                    <input type="text" class="form-control" id="title" ng-model="vm.libroFormulario.titulo" placeholder="Título del libro">
+                    <input type="text" class="form-control" name="title" ng-model="vm.libroFormulario.titulo"
+                        required minlength="2" maxlength="150" placeholder="Título del libro">
                 </div> 
             </div> <!-- titulo -->
 
@@ -65,7 +92,7 @@
                     <label for="autor">Autor:</label>
                 </div>
                 <div class="col-9">
-                    <input type="text" class="form-control"  ng-model="vm.libroFormulario.autor"  id="autor" placeholder="Autor del libro">
+                    <input type="text" class="form-control"  ng-model="vm.libroFormulario.autor"  name="autor" placeholder="Autor del libro">
                 </div>
             </div> <!-- autor -->
 
@@ -74,7 +101,9 @@
                     <label for="paginas">Páginas:</label>
                 </div>
                 <div class="col-9">
-                    <input type="number" class="form-control" ng-model="vm.libroFormulario.paginas"  id="paginas" placeholder="Número de paginas del libro">
+                    <input type="number" class="form-control" ng-model="vm.libroFormulario.paginas"
+                        name="paginas" placeholder="Número de paginas del libro"
+                        min="0" max="5000">
                 </div>
             </div> <!-- paginas -->
 
@@ -87,12 +116,12 @@
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <input type="radio" aria-label="Radio button for following text input" name="digital" id="digital" ng-checked="vm.libroFormulario.digital">
-                                <label class="form-check-label" for="papel">Digital</label>
+                                <input type="radio" aria-label="Radio button for following text input" name="digital" ng-checked="vm.libroFormulario.digital" ng-click="ocultar=true">
+                                <label class="form-check-label" for="digital">Digital</label>
                             </div>
                             <div class="input-group-text">
-                                <input type="radio" aria-label="Radio button for following text input" name="digital" id="papel" ng-checked="!vm.libroFormulario.digital">
-                                <label class="form-check-label" for="papel">Papel</label>
+                                <input type="radio" aria-label="Radio button for following text input" name="papel" ng-checked="!vm.libroFormulario.digital" ng-click="ocultar=false">
+                                <label class="form-check-label" for="papel">Físico</label>
                             </div>
                         </div>
                         <input type="text" class="form-control" aria-label="Text input with radio button">
@@ -100,54 +129,32 @@
                 </div>
             </div> <!-- formato -->
 
-<!--
-            <div class="form-group">
-                <p>Tipo:</p>
-                <div class="form-check form-check-inline" ng-repeat="formato in vm.formatos">
-                      <input class="form-check-input" type="checkbox" id="{{formato}}" ng-checked="vm.libroFormulario.formatos[$index]" value="{{formato}}">
-                      <label class="form-check-label" for="{{formato}}">{{formato}}</label>
+            <div class="form-group row" ng-if="vm.libroFormulario.digital || ocultar">
+                <div class="col-3 text-right">
+                    <label for="formato">Tipos de formato:</label>
                 </div>
-               
-            </div>
- -->
+                <div class="col-9">
+                    <div class="input-group-prepend row">
+                        <div class="input-group-text" ng-repeat="formato in vm.formatos">
+                            <input type="checkbox" aria-label="Checkbox for following text input" >
+                            <label class="form-check-label" for="papel">{{ formato }}</label>
+                        </div>
+                        <div class="input-group-text">
+                            <input type="checkbox" aria-label="Checkbox for following text input" >
+                            <label class="form-check-label" for="papel">
+                                Otro: <input type="text" class="form-control" name="otroFormato">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- tipos de formato -->
+
+            <input type="submit" value="{{(vm.libroFormulario)?'Modificar Libro':'Crear Libro'}}" class="btn btn-info" ng-disabled="formulario.$invalid || formulario.$pristine">
      </form>
-      <button  class="btn btn-success" type="submit" ng-click="vm.crear()" ng-show="(vm.libroEditar)?false:true">Crear</i></button>
-      <button  class="btn btn-success" type="submit" ng-click="vm.editar()" ng-show="(vm.libroEditar)?true:false">Guardar</i></button>
+     
 
 
 
-    </div>
+    </div> <!-- col formulario -->
 
-</div>
-
-
-
-
-
-<hr><hr><hr><hr>
-<div class="row">
-        <div class="col" ng-repeat="libro in vm.libros">
-            <div class="card" style="width: 18rem;" >
-                <div class="card-body">
-                <h5 class="card-title">{{ libro.titulo }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ libro.autor }}</h6>
-                <p class="card-text">
-                    <ul>
-                        <li>I.S.B.N.: {{ libro.isbn }}</li>
-                        <li>Páginas: {{ libro.paginas }}</li>
-                        <li>Formato: {{ (libro.digital)?'Digital':'Físico' }}
-                            <ul>
-                                <li ng-repeat="formato in libro.formatos">{{ formato }}</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </p>
-                
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
+</div> <!-- row -->

@@ -11,19 +11,19 @@ interface ILibrosService{
      * 
      * @param id 
      */
-    getLibroById(id: number): angular.IPromise<ILibro>;
+    getLibroById(id: number): angular.IPromise<any>;
 
     /**
      * 
      * @param id 
      */
-    deleteLibro(id: number): angular.IPromise<boolean>;
+    deleteLibro(id: number): angular.IPromise<any>;
 
     /**
      * 
      * @param libro 
      */
-    crear(libro: ILibro): angular.IPromise<ILibro>;
+    crearLibro(libro: ILibro): angular.IPromise<any>;
 
     /**
      * Modificar un libro ya existente
@@ -31,41 +31,59 @@ interface ILibrosService{
      * @param libro nuevos datos del libro
      * @return true si modifica el libro, false si no lo modifica,
      */
-    modificar(id: number, libro: ILibro): angular.IPromise<boolean>;  
+    modificarLibro(id: number, libro: ILibro): angular.IPromise<any>;  
 }
 
 class LibrosService implements ILibrosService{
 
     private http: ng.IHttpService;
+    private URL: string;
 
     constructor($http) {
         console.trace('LibrosService constructor');
         this.http = $http;
+        this.URL = "http://localhost:3000/libros/";
     }
 
     //TODO => Poner public a los metodos y tipar correctamente.
 
     getLibros = (): any => {
-        const url = "http://localhost:3000/libros";
-        console.trace('GET ' + url);
-        return this.http.get(url).then( res => res.data );
+        console.trace('GET ' + this.URL);
+        return this.http.get(this.URL).then( res => res.data );
     }
     
     
-    getLibroById(id: number): angular.IPromise<ILibro> {
+    getLibroById(id: number): angular.IPromise<any> {
         throw new Error("Method not implemented.");
     }
 
-    deleteLibro(id: number): angular.IPromise<boolean> {
-        throw new Error("Method not implemented.");
+    deleteLibro(id: number): angular.IPromise<any> {
+        let ruta = this.URL + id;
+        console.trace('DELETE ' + ruta);
+        return this.http.delete(ruta).then(
+            (res) => {
+                console.debug("Petición Rest correcta.");
+                return res.data;
+            });
     }
 
-    crear(libro: ILibro): angular.IPromise<ILibro> {
-        throw new Error("Method not implemented.");
+    crearLibro(libro: ILibro): angular.IPromise<any> {
+        console.trace('POST ' + this.URL);
+        return this.http.post(this.URL, libro).then(
+            (res) => {
+                console.debug("Petición Rest correcta.");
+                return res.data;
+            });
     }
 
-    modificar(id: number, libro: ILibro): angular.IPromise<boolean> {
-        throw new Error("Method not implemented.");
+    modificarLibro(id: number, libro: ILibro): angular.IPromise<any> {
+        let ruta = this.URL + id;
+        console.trace('PUT ' + ruta);
+        return this.http.put(ruta, libro).then(
+            (res) => {
+                console.debug("Petición Rest correcta.");
+                return res.data;
+            });
     }
 
 
