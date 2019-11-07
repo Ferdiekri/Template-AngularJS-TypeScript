@@ -32,6 +32,13 @@ var LibrosController = (function () {
         this.guardarLibro = function () {
             console.trace("guardarLibro");
             var lib = $scope.vm.libroFormulario;
+            if (!lib.digital) {
+                lib.formatos = undefined;
+            }
+            if (lib.digital && !lib.formatos) {
+                $scope.vm.mensaje = "Si el libro es DIGITAL, tiene que tener al menos un FORMATO.";
+                return false;
+            }
             if (lib.id) {
                 librosService.modificarLibro(lib.id, lib).then(function (data) {
                     console.warn("Libro modificado. %o", data);

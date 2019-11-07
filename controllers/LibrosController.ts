@@ -62,9 +62,22 @@ class LibrosController implements ng.IController{
 
         this.guardarLibro = () => {
             console.trace("guardarLibro");
+
             let lib = $scope.vm.libroFormulario; 
+
+            // Si el libro elegido es en PAPEL, le quitamos los FORMATOS que haya podido seleccionar antes.
+            if (!lib.digital){ 
+                lib.formatos = undefined;
+            }
+
+            // Validar que si es libro es DIGITAL, al menos tiene que haber un FORMATO seleccionado.
+            if ( lib.digital && !lib.formatos ){
+                $scope.vm.mensaje = "Si el libro es DIGITAL, tiene que tener al menos un FORMATO.";
+                return false; 
+            }
+            
             if( lib.id ){
-                // modificar
+                // Modificar libro.
                 librosService.modificarLibro(lib.id, lib).then(
                     ( data ) => {
                         console.warn("Libro modificado. %o", data);
@@ -80,7 +93,7 @@ class LibrosController implements ng.IController{
                 );
 
             } else {
-                // insertar
+                // Insertar libro.
                 librosService.crearLibro($scope.vm.libroFormulario).then(
                     ( data ) => {
                         console.warn("Libro creado. %o", data);

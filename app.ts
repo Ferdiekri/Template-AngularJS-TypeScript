@@ -7,6 +7,8 @@
  *                                                   *
  *****************************************************/
 
+// c:\\1713\\repaso\\node_modules\\.bin\\tsc.cmd -p c:\\1713\\repaso\\tsconfig.json --watch
+
 
 
 // 1. Declaración de la App.

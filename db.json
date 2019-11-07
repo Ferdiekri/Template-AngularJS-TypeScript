@@ -1,6 +1,30 @@
 {
   "libros": [
     {
+      "titulo": "Mortadelo y Filemon",
+      "isbn": "9788440635730",
+      "id": 22,
+      "numeroPaginas": 64,
+      "autor": "Ibáñez",
+      "digital": "true",
+      "formatos": [
+        "epub",
+        "pdf"
+      ]
+    },
+    {
+      "titulo": "Percy Jackson Y El Mar De Los Monstruos",
+      "autor": "Rick Riordan",
+      "numeroPaginas": 541,
+      "isbn": "8408064908",
+      "digital": true,
+      "id": 44,
+      "formatos": [
+        "epub",
+        "mobi"
+      ]
+    },
+    {
       "isbn": "11111",
       "titulo": "Libro 1",
       "autor": "Autor 1",
